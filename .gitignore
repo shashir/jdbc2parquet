@@ -1,0 +1,13 @@
+# Temporary files used by editors.
+*~
+*.swp
+.#*
+\#*
+
+# Build and run artifacts.
+target/
+build/
+logs/
+temp/
+output/
+out/
