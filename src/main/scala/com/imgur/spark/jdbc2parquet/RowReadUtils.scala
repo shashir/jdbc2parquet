@@ -39,19 +39,19 @@ object RowReadUtils {
         return primitiveExtractor(resultSet)
       }
     }
-    def getNullableEpoch(columnName: String): Long = getNullablePrimitive[Long](
+    def getNullableEpoch(columnName: String): java.lang.Long = getNullablePrimitive[java.lang.Long](
       columnName,
       _.getTimestamp(columnName).getTime
     )
-    def getNullableLong(columnName: String): Long = getNullablePrimitive[Long](
+    def getNullableLong(columnName: String): java.lang.Long = getNullablePrimitive[java.lang.Long](
       columnName,
       _.getLong(columnName)
     )
-    def getNullableInt(columnName: String): Int = getNullablePrimitive[Int](
+    def getNullableInt(columnName: String): java.lang.Integer = getNullablePrimitive[java.lang.Integer](
       columnName,
       _.getInt(columnName)
     )
-    def getNullableDouble(columnName: String): Double = getNullablePrimitive[Double](
+    def getNullableDouble(columnName: String): java.lang.Double = getNullablePrimitive[java.lang.Double](
       columnName,
       _.getDouble(columnName)
     )
