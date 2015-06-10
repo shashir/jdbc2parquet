@@ -9,26 +9,12 @@ import WriteType.WriteType
 import scala.annotation.tailrec
 
 object RowReadUtils {
-  def getResults(columnConfigurations: Seq[ColumnConfiguration])(resultSet: ResultSet): Seq[Row] = {
-    @tailrec def _getResults(columnConfigurations: Seq[ColumnConfiguration])(
-      resultSet: ResultSet,
-      agg: Seq[Row]
-      ): Seq[Row] = {
-      if (resultSet.next()) {
-        _getResults(columnConfigurations)(
-          resultSet,
-          agg.+:(Row.fromSeq(
-            columnConfigurations.map { columnConfig: ColumnConfiguration =>
-              resultSet.getReadTypeColumn(columnConfig.readColumn, columnConfig.writeType)
-            }
-          ))
-        )
-      } else {
-        agg.reverse
+  def getResults(columnConfigurations: Seq[ColumnConfiguration])(resultSet: ResultSet): Row = {
+    return Row.fromSeq(
+      columnConfigurations.map { columnConfig: ColumnConfiguration =>
+        resultSet.getReadTypeColumn(columnConfig.readColumn, columnConfig.writeType)
       }
-    }
-
-    return _getResults(columnConfigurations)(resultSet, Seq())
+    )
   }
 
   implicit class ExtendedResultSet(resultSet: ResultSet) {

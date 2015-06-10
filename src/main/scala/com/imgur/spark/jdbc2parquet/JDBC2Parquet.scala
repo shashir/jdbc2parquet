@@ -52,7 +52,7 @@ object JDBC2Parquet extends App {
     etlConfig.schema
   ))
 
-  val rowFromJDBC: RDD[Row] = new JdbcRDD[Seq[Row]](
+  val rowFromJDBC: RDD[Row] = new JdbcRDD[Row](
     spark,
     sparkJDBCParams.value.getConnection,
     sparkJDBCParams.value.query,
@@ -60,7 +60,7 @@ object JDBC2Parquet extends App {
     sparkJDBCParams.value.maxIndex,
     sparkJDBCParams.value.partitions,
     RowReadUtils.getResults(sparkJDBCParams.value.schema)
-  ).flatMap { rows: Seq[Row] => rows }
+  )
 
   val sparkSQL = new SQLContext(spark)
   val parquetRDD = sparkSQL.applySchema(rowFromJDBC, SparkSQLUtils.getSchema(etlConfig.schema))
